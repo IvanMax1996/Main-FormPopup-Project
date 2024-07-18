@@ -1,0 +1,792 @@
+/* ------------------------------------------------------------------------ */
+/* Стили слайдера */
+/* ------------------------------------------------------------------------ */
+
+.filter {
+  position: relative;
+  width: 100%;
+  padding-bottom: 35px;
+
+  &__wrapper {
+    position: absolute;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  &__slider {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    column-gap: 15px;
+    position: relative;
+    z-index: 50;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  &__slider::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили слайдера */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Стили элементов слайдера */
+/* ------------------------------------------------------------------------ */
+
+.form-slider {
+  &__item,
+  &__inner {
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  &__item {
+    flex-shrink: 0;
+  }
+
+  &__inner {
+    display: flex;
+  }
+
+  &__button {
+    position: relative;
+    height: 36px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: inset -2px 2px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    border: 1px solid #f1e8d9;
+    background-color: #fff;
+    color: #525964;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0 36px 0 18px;
+    transition: all 0.2s;
+
+    &:not(.form-slider__button--active):hover {
+      @media (hover: hover) {
+        border: 1px solid #d0d0d0;
+        outline: none;
+      }
+    }
+
+    &:active {
+      @media (hover: none) {
+        border: 1px solid #d0d0d0;
+        outline: none;
+      }
+    }
+
+    &--active {
+      border: none;
+      box-shadow: inset 2px 2px 7px rgba(0, 0, 0, 0.1);
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      background-color: #df403b;
+      color: white;
+
+      &:hover {
+        @media (hover: hover) {
+          opacity: 0.6;
+        }
+      }
+
+      &:active {
+        @media (hover: none) {
+          opacity: 0.6;
+        }
+      }
+
+      &:focus {
+        border: none;
+      }
+    }
+  }
+
+  &__button-icon {
+    position: absolute;
+    right: 13px;
+    top: 12px;
+    transition: all 0.2s;
+
+    &--rotate {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__button-reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0;
+    background: #df403b;
+    color: white;
+    aspect-ratio: 1;
+    position: relative;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    opacity: 0;
+    outline: none;
+    border: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: inset -2px 2px 7px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      @media (hover: hover) {
+        opacity: 0.6;
+      }
+    }
+
+    &:active {
+      @media (hover: none) {
+        opacity: 0.6;
+      }
+    }
+
+    &--active {
+      opacity: 1;
+      border-left: 2px solid grey;
+      width: 36px;
+    }
+  }
+
+  &__dropdown {
+    background: white;
+    border-radius: 6px;
+    visibility: hidden;
+    left: 2px;
+    top: 50px;
+    position: absolute;
+    z-index: 10;
+    transition: all 0.2s;
+    max-height: 0;
+    width: max-content;
+    overflow: hidden;
+    box-shadow: -2px 2px 6px rgba(65, 65, 65, 0.2);
+    min-width: 170px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #f1736f lightgray;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: lightgray;
+      border-radius: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f1736f;
+      border-radius: 20px;
+    }
+  }
+
+  &__dropdown-wrap {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding: 10px 20px;
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили элементов слайдера */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Стили radio-кнопок */
+/* ------------------------------------------------------------------------ */
+
+.form-slider,
+.form-popup {
+  &__input-radio {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &--box-shadow::before {
+      box-shadow: 0 0 0 0.2rem #f1736f;
+    }
+  }
+
+  &__input-radio + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    color: #525964;
+    margin-bottom: 0 !important;
+
+    &:hover {
+      @media (hover: hover) {
+        color: #df403b;
+      }
+    }
+  }
+
+  &__input-radio:not(:disabled):not(:checked) + label:hover::before {
+    @media (hover: hover) {
+      border-color: #df403b;
+    }
+  }
+
+  &__input-radio:not(:disabled):active + label::before {
+    @media (hover: none) {
+      background-color: #f1736f;
+      border-color: #f1736f;
+    }
+  }
+
+  &__input-radio + label::before {
+    content: '';
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+  }
+
+  &__input-radio:focus:not(:checked) + label::before {
+    border-color: #f1736f;
+  }
+
+  &__input-radio:focus + label::before {
+    box-shadow: 0 0 0 0.2rem #f1736f;
+  }
+
+  &__input-radio:checked + label::before {
+    border-color: #df403b;
+    background-color: #df403b;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
+
+  &__input-radio:disabled + label::before {
+    background-color: #e9ecef;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили radio-кнопок */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Стили checkbox-кнопок */
+/* ------------------------------------------------------------------------ */
+
+.form-slider,
+.form-popup {
+  &__input-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &__input-checkbox + label {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    color: #525964;
+  }
+
+  &__input-checkbox + label::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 0.8em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 70% 70%;
+    position: relative;
+    top: 1px;
+  }
+
+  &__input-checkbox:checked + label::before {
+    background-color: #df403b;
+    border-color: #df403b;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23FFFFFF' width='800px' height='800px' viewBox='0 0 1920 1920' xmlns='http://www.w3.org/2000/svg' stroke='%23FFFFFF'%3e%3cg id='SVGRepo_bgCarrier' stroke-width='0'/%3e%3cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'/%3e%3cg id='SVGRepo_iconCarrier'%3e%3cpath d='M1743.858 267.012 710.747 1300.124 176.005 765.382 0 941.387l710.747 710.871 1209.24-1209.116z' fill-rule='evenodd'/%3e%3c/g%3e%3c/svg%3e");
+  }
+
+  &__input-checkbox:checked + label {
+    color: #df403b;
+  }
+
+  &__input-checkbox + label:hover::before {
+    @media (hover: hover) {
+      border-color: #df403b;
+    }
+  }
+
+  &__input-checkbox + label:hover {
+    @media (hover: hover) {
+      color: #df403b;
+    }
+  }
+
+  &__input-checkbox + label:active::before {
+    @media (hover: none) {
+      border-color: #df403b;
+    }
+  }
+
+  &__input-checkbox + label:active {
+    @media (hover: none) {
+      color: #df403b;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили checkbox-кнопок */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Стили number/range input */
+/* ------------------------------------------------------------------------ */
+
+.form-slider {
+  &__input-number-box {
+    display: flex;
+    column-gap: 16px;
+    margin-bottom: 10px;
+    max-width: 200px;
+  }
+
+  & input[type='number'].form-slider__input-number {
+    outline: none;
+    border: 1px solid #adb5bd;
+    margin: 0;
+    padding: 0 10px;
+    max-width: 100px;
+    width: 100%;
+    box-shadow: none;
+    -moz-appearance: textfield;
+  }
+
+  & input[type='number'].form-slider__input-number::-webkit-outer-spin-button,
+  & input[type='number'].form-slider__input-number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &__range {
+    position: relative;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  &__input-range-box {
+    position: relative;
+
+    & input {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      top: -10px;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  &__range-progress {
+    border-radius: 5px;
+    height: 5px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-color: #df403b;
+  }
+
+  & input[type='range'].form-slider__input-range::-webkit-slider-thumb,
+  & input[type='range'].form-slider__input-range::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #df403b;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.form-popup {
+  &__input-number-box-popup {
+    display: flex;
+    margin-bottom: 20px;
+    column-gap: 20px;
+    justify-content: space-between;
+  }
+
+  &__input-range-box-popup {
+    position: relative;
+
+    & input {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      box-shadow: none;
+      top: -17px;
+    }
+  }
+
+  &__range-progress-popup {
+    border-radius: 5px;
+    height: 10px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-color: #df403b;
+  }
+
+  & input[type='number'].form-popup__input-number-popup {
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 0;
+    padding: 0 10px;
+    max-width: 100px;
+    width: 100%;
+    box-shadow: none;
+    -moz-appearance: textfield;
+    height: 50px;
+    font-size: 20px;
+    max-width: 200px;
+  }
+
+  & input[type='number'].form-popup__input-number-popup::-webkit-outer-spin-button,
+  & input[type='number'].form-popup__input-number-popup::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  & input[type='range'].form-popup__input-range::-webkit-slider-thumb,
+  & input[type='range'].form-popup__input-range::-moz-range-thumb {
+    height: 25px;
+    width: 25px;
+    border: none;
+    border-radius: 50%;
+    background: #df403b;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+
+  &__range-popup {
+    position: relative;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили number/range input */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Стили popup-окна */
+/* ------------------------------------------------------------------------ */
+
+.filter-popup {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #12131580;
+  z-index: 999;
+  height: 100vh;
+  user-select: none;
+
+  &__wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    max-height: 0;
+  }
+
+  &__inner {
+    width: 100%;
+    max-height: inherit;
+  }
+
+  &__item {
+    display: none;
+  }
+
+  &__button-wrap {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__button-touch {
+    outline: none;
+    border: none;
+    cursor: inherit;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    height: 10px;
+    background-color: white;
+    width: 100px;
+    margin-top: 30px;
+
+    &:hover {
+      @media (hover: hover) {
+        outline: none;
+        border: none;
+      }
+    }
+
+    &:active {
+      @media (hover: none) {
+        outline: none;
+        border: none;
+      }
+    }
+  }
+}
+
+.form-popup {
+  &__item {
+    display: none;
+    width: 100%;
+    background-color: white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  &__header {
+    padding: 16px 16px 12px;
+    font-size: 20px;
+    color: #525964;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  &__content-wrap {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    border-bottom: 1px solid #f3f4f6;
+    overflow: auto;
+    max-height: 250px;
+    scrollbar-width: thin;
+    scrollbar-color: #f1736f lightgray;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: lightgray;
+      border-radius: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f1736f;
+      border-radius: 20px;
+    }
+
+    &--padding {
+      padding: 20px;
+    }
+  }
+
+  &__input-wrap {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.8rem;
+
+    &--checkbox {
+      display: block;
+      padding: 10px 10px 10px 20px;
+      border-radius: 0.6rem;
+      border: 1px solid #e5e7eb;
+    }
+  }
+
+  &__btn-wrapper {
+    padding: 16px;
+  }
+
+  &__btn-info {
+    border: none;
+    outline: none;
+    background-color: #df403b;
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+    &:hover {
+      @media (hover: hover) {
+        background-color: #4e0f0d;
+      }
+    }
+
+    &:active {
+      @media (hover: none) {
+        background-color: #4e0f0d;
+      }
+    }
+  }
+
+  &__label-radio {
+    font-size: 18px;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Стили popup-окна */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Область нажатия для фильтра на ПК */
+/* ------------------------------------------------------------------------ */
+
+.filter-area-desktop {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Область нажатия для фильтра на ПК */
+/* ------------------------------------------------------------------------ */
+
+// <<<<<------------------------------------------------------------------>>>>>
+
+/* ------------------------------------------------------------------------ */
+/* Общие стили */
+/* ------------------------------------------------------------------------ */
+
+body {
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.container {
+  max-width: 800px;
+  margin: 100px auto 0;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+
+  @media screen and (max-width: 768px) {
+    margin: 100px 20px 0;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.visible-block {
+  visibility: visible;
+}
+
+.overscroll-y-hidden {
+  overflow-y: hidden;
+}
+
+.overscroll-browser-reset {
+  overscroll-behavior-y: none;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Общие стили */
+/* ------------------------------------------------------------------------ */
